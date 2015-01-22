@@ -14,6 +14,9 @@ namespace Quizzy
     {
         protected void Application_Start()
         {
+            // Set the QuizzyDatabaseInitializer as the database initializer.
+            System.Data.Entity.Database.SetInitializer(new QuizzyDatabaseInitializer()); 
+
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
