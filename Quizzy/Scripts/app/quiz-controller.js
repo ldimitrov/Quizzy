@@ -37,4 +37,21 @@ angular.module('QuizzyApp', [])
                 $scope.working = false;
             });
         };
+
+        /*
+         * This function sends the answer selected by the user to the Web API and stores the result
+         * in the $scope object.
+         */
+        $scope.sendAnswer = function (option) {
+            $scope.working = true;
+            $scope.answered = true;
+
+            $http.post('/api/quizzy', { 'questionId': option.questionId, 'optionId': option.id }).success(function (data, status, headers, config) {
+                $scope.correctAnswer = (data === "true");
+                $scope.working = false;
+            }).error(function (data, status, headers, config) {
+                $scope.title = "Something went wrong";
+                $scope.working = false;
+            });
+        };
     });
